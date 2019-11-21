@@ -88,3 +88,27 @@ chmod +x ./upload.js
 * `-h` **destination** Redis hostname [127.0.0.1]
 * `-p` **destination** Redis port [6379]
 * `--filename` Filename of the json [dump.json]
+
+___
+
+
+# Oldest key
+
+Get the oldest idle time.
+
+### Installation
+
+```bash
+npm install
+chmod +x ./oldest.js
+```
+
+### Usage
+
+```bash
+./oldest.js [-h] [-p]
+```
+
+### Options [default]
+* `-h` Redis hostname [127.0.0.1]
+* `-p` Redis port [6379]

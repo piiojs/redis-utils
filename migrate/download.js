@@ -63,7 +63,6 @@ stream.on('data', (resultKeys) => {
         // Write the object to file
         console.log('Write hashes to file');
         fs.appendFileSync(fd, sep + JSON.stringify(hashes), 'utf8');
-        // fileStream.writeSync(sep + JSON.stringify(hashes));
         sep = ',';
 
         // Resume scanning
@@ -105,15 +104,15 @@ function millisecondsToStr(milliseconds) {
 
   const hours = Math.floor((temp %= 86400) / 3600);
   if (hours) {
-    return `${hours} hour ${numberEnding(hours)}`;
+    return `${hours} hour${numberEnding(hours)}`;
   }
   const minutes = Math.floor((temp %= 3600) / 60);
   if (minutes) {
-    return `${minutes} minute ${numberEnding(minutes)}`;
+    return `${minutes} minute${numberEnding(minutes)}`;
   }
   const seconds = temp % 60;
   if (seconds) {
-    return `${seconds} second ${numberEnding(seconds)}`;
+    return `${seconds} second${numberEnding(seconds)}`;
   }
   return 'Less than a second';
 }
