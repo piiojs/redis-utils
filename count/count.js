@@ -13,7 +13,7 @@ const port = argv.p;
 const { pattern } = argv;
 
 let roundCount = 0;
-let hashesCount = 0;
+let keysCount = 0;
 const startTime = new Date();
 
 const redis = new Redis({
@@ -32,7 +32,7 @@ console.log(`\n*********** START SCANNING FOR PATTERN ${pattern} ***********`);
 stream.on('data', (resultKeys) => {
   roundCount += 1;
   console.log(`\nFound ${resultKeys.length} keys on this round. Round count: ${roundCount}`);
-  hashesCount += resultKeys.length;
+  keysCount += resultKeys.length;
 });
 stream.on('end', () => {
   console.log('\n*********** SCAN FINISHED ***********');
@@ -43,7 +43,7 @@ stream.on('end', () => {
 
   // Summary
   console.log(`\nNumber of rounds: ${roundCount}`);
-  console.log(`Number of hashes found: ${hashesCount}`);
+  console.log(`Number of keys found: ${keysCount}`);
   console.info(`Execution time: ${executionTimeStr}`);
   process.exit();
 });

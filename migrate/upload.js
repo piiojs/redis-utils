@@ -17,7 +17,7 @@ const { filename } = argv;
 const startTime = new Date();
 let key;
 let value;
-let hashesCount = 0;
+let keysCount = 0;
 const promises = [];
 
 const redis = new Redis({
@@ -35,8 +35,8 @@ pipeline.on('data', (data) => {
       ({ value } = data);
       process.stdout.clearLine();
       process.stdout.cursorTo(0);
-      hashesCount += 1;
-      process.stdout.write(`Adding ${hashesCount} hashes`);
+      keysCount += 1;
+      process.stdout.write(`Adding ${keysCount} keys`);
       promises.push(redis.set(key, value));
       break;
       // no default
@@ -46,7 +46,7 @@ pipeline.on('end', () => {
   console.log('end parsing');
   Promise.all(promises)
     .then((res) => {
-      console.log(`Number of hashes added: ${res.length}`);
+      console.log(`Number of keys added: ${res.length}`);
 
       const executionTimeMs = new Date() - startTime;
       const executionTimeStr = millisecondsToStr(executionTimeMs);

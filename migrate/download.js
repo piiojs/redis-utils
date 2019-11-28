@@ -16,7 +16,7 @@ const { pattern } = argv;
 const { filename } = argv;
 
 let roundCount = 0;
-let hashesCount = 0;
+let keyCount = 0;
 let sep = '';
 const startTime = new Date();
 
@@ -50,19 +50,20 @@ stream.on('data', (resultKeys) => {
   if (resultKeys.length > 0) {
     // Pause scanning
     stream.pause();
-    const hashes = {};
+    const keyValues = {};
     console.log('Getting values');
+    console.log(resultKeys);
     redis.mget(resultKeys)
       .then((resultValues) => {
         console.log(`Got ${resultValues.length} values`);
         for (let i = 0; i < resultKeys.length; i++) {
-          hashes[resultKeys[i]] = resultValues[i];
+          keyValues[resultKeys[i]] = resultValues[i];
         }
-        hashesCount += resultKeys.length;
+        keyCount += resultKeys.length;
 
         // Write the object to file
-        console.log('Write hashes to file');
-        fs.appendFileSync(fd, sep + JSON.stringify(hashes), 'utf8');
+        console.log('Write key-values to file');
+        fs.appendFileSync(fd, sep + JSON.stringify(keyValues), 'utf8');
         sep = ',';
 
         // Resume scanning
@@ -89,7 +90,7 @@ stream.on('end', () => {
 
   // Summary
   console.log(`\nNumber of rounds: ${roundCount}`);
-  console.log(`Number of hashes found: ${hashesCount}`);
+  console.log(`Number of keyValues found: ${keyCount}`);
   console.log(`Filename: ${filename}`);
   console.info(`Execution time: ${executionTimeStr}`);
   process.exit();

@@ -15,7 +15,7 @@ const { pattern } = argv;
 const { time } = argv;
 
 let roundCount = 0;
-let hashesCount = 0;
+let keysCount = 0;
 const startTime = new Date();
 const promises = [];
 
@@ -34,7 +34,7 @@ console.log(`\n*********** START SCANNING FOR PATTERN ${pattern} ***********`);
 
 stream.on('data', (resultKeys) => {
   roundCount += 1;
-  hashesCount += resultKeys.length;
+  keysCount += resultKeys.length;
   console.log(`\nFound ${resultKeys.length} keys on this round. Round count: ${roundCount}`);
   // Pause scanning
   stream.pause();
@@ -69,7 +69,7 @@ stream.on('end', () => {
 
   // Summary
   console.log(`\nNumber of rounds: ${roundCount}`);
-  console.log(`Set expire on: ${hashesCount}`);
+  console.log(`Set expire on: ${keysCount}`);
   console.info(`Execution time: ${executionTimeStr}`);
   process.exit();
 });
