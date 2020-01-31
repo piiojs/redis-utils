@@ -7,11 +7,13 @@ const fs = require('fs');
 const { argv } = require('yargs')
   .default('h', '127.0.0.1')
   .default('p', 6379)
+  .default('a', '')
   .default('pattern', '*')
   .default('filename', 'dump.json');
 
 const host = argv.h;
 const port = argv.p;
+const auth = argv.a;
 const { pattern } = argv;
 const { filename } = argv;
 
@@ -21,8 +23,9 @@ let sep = '';
 const startTime = new Date();
 
 const redis = new Redis({
-  host,
-  port
+  host: host,
+  port: port,
+  password: auth
 });
 
 // Delete previous file

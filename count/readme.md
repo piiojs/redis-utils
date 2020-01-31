@@ -12,10 +12,11 @@ chmod +x ./count.js
 ### Usage
 
 ```bash
-./count.js [-h] [-p] [--pattern]
+./count.js [-h] [-p] [-a] [--pattern]
 ```
 
 ### Options [default]
 * `-h` Redis hostname [127.0.0.1]
 * `-p` Redis port [6379]
+* `-a` Redis auth ['']
 * `--pattern` Glob pattern [\*]
