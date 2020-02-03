@@ -78,7 +78,7 @@ chmod +x ./upload.js
 ### download.js options [default]
 * `-h` **origin** Redis hostname [127.0.0.1]
 * `-p` **origin** Redis port [6379]
-* `-a` Redis auth ['']
+* `-a` **origin** Redis auth ['']
 * `--pattern` Glob pattern [\*]
 * `--filename` Filename of the json [dump.json]
 
@@ -90,7 +90,7 @@ chmod +x ./upload.js
 ### upload.js options [default]
 * `-h` **destination** Redis hostname [127.0.0.1]
 * `-p` **destination** Redis port [6379]
-* `-a` Redis auth ['']
+* `-a` **destination** Redis auth ['']
 * `--filename` Filename of the json [dump.json]
 
 ___
