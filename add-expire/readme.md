@@ -12,12 +12,13 @@ chmod +x ./expire.js
 ### Usage
 
 ```bash
-./expire.js [-h] [-p] [-a] [--pattern] [--time]
+./expire.js [-h] [-p] [-a] [-t] [--pattern] [--time]
 ```
 
 ### Options [default]
 * `-h` Redis hostname [127.0.0.1]
 * `-p` Redis port [6379]
 * `-a` Redis auth ['']
+* `-t` Redis TLS [false]
 * `--pattern` Glob pattern [\*]
 * `--time` Expiration time in seconds [7776000]

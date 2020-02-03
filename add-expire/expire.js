@@ -4,15 +4,18 @@
 
 const Redis = require('ioredis');
 const { argv } = require('yargs')
+  .boolean('t')
   .default('h', '127.0.0.1')
   .default('p', 6379)
   .default('a', '')
+  .default('t', false)
   .default('pattern', '*')
   .default('time', 60 * 60 * 24 * 30 * 3); // 60 * 60 * 24 * 30 * 3
 
 const host = argv.h;
 const port = argv.p;
 const auth = argv.a;
+const tls = argv.t;
 const { pattern } = argv;
 const { time } = argv;
 
@@ -21,11 +24,17 @@ let keysCount = 0;
 const startTime = new Date();
 const promises = [];
 
-const redis = new Redis({
+let redisConfig = {
   host: host,
   port: port,
   password: auth
-});
+}
+
+if (tls === true) (
+  redisConfig.tls = {}
+)
+
+const redis = new Redis(redisConfig);
 
 // Start scanning
 const stream = redis.scanStream({

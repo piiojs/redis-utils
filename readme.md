@@ -15,13 +15,14 @@ chmod +x ./count.js
 ### Usage
 
 ```bash
-./count.js [-h] [-p] [-a] [--pattern]
+./count.js [-h] [-p] [-a] [-t] [--pattern]
 ```
 
 ### Options [default]
 * `-h` Redis hostname [127.0.0.1]
 * `-p` Redis port [6379]
 * `-a` Redis auth ['']
+* `-t` Redis TLS [false]
 * `--pattern` Glob pattern [\*]
 
 ___
@@ -41,13 +42,14 @@ chmod +x ./expire.js
 ### Usage
 
 ```bash
-./expire.js [-h] [-p] [-a] [--pattern] [--time]
+./expire.js [-h] [-p] [-a] [-t] [--pattern] [--time]
 ```
 
 ### Options [default]
 * `-h` Redis hostname [127.0.0.1]
 * `-p` Redis port [6379]
 * `-a` Redis auth ['']
+* `-t` Redis TLS [false]
 * `--pattern` Glob pattern [\*]
 * `--time` Expiration time in seconds [7776000]
 
@@ -73,24 +75,26 @@ chmod +x ./upload.js
 ### download.js usage
 
 ```bash
-./download.js [-h] [-p] [-a] [--pattern] [--filename]
+./download.js [-h] [-p] [-a] [-t] [--pattern] [--filename]
 ```
 ### download.js options [default]
 * `-h` **origin** Redis hostname [127.0.0.1]
 * `-p` **origin** Redis port [6379]
 * `-a` **origin** Redis auth ['']
+* `-t` **origin** Redis TLS [false]
 * `--pattern` Glob pattern [\*]
 * `--filename` Filename of the json [dump.json]
 
 ### upload.js usage
 
 ```bash
-./upload.js [-h] [-p] [-a] [--filename]
+./upload.js [-h] [-p] [-a] [-t] [--filename]
 ```
 ### upload.js options [default]
 * `-h` **destination** Redis hostname [127.0.0.1]
 * `-p` **destination** Redis port [6379]
 * `-a` **destination** Redis auth ['']
+* `-t` **destination** Redis TLS [false]
 * `--filename` Filename of the json [dump.json]
 
 ___
@@ -110,10 +114,11 @@ chmod +x ./oldest.js
 ### Usage
 
 ```bash
-./oldest.js [-h] [-p] [-a]
+./oldest.js [-h] [-p] [-a] [-t]
 ```
 
 ### Options [default]
 * `-h` Redis hostname [127.0.0.1]
 * `-p` Redis port [6379]
 * `-a` Redis auth ['']
+* `-t` Redis TLS [false]
