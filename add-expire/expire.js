@@ -6,11 +6,13 @@ const Redis = require('ioredis');
 const { argv } = require('yargs')
   .default('h', '127.0.0.1')
   .default('p', 6379)
+  .default('a', '')
   .default('pattern', '*')
   .default('time', 60 * 60 * 24 * 30 * 3); // 60 * 60 * 24 * 30 * 3
 
 const host = argv.h;
 const port = argv.p;
+const auth = argv.a;
 const { pattern } = argv;
 const { time } = argv;
 
@@ -20,8 +22,9 @@ const startTime = new Date();
 const promises = [];
 
 const redis = new Redis({
-  host,
-  port
+  host: host,
+  port: port,
+  password: auth
 });
 
 // Start scanning

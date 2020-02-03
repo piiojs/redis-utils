@@ -5,20 +5,22 @@
 const Redis = require('ioredis');
 const { argv } = require('yargs')
   .default('h', '127.0.0.1')
-  .default('p', 6379);
+  .default('p', 6379)
+  .default('a', '');
 
 const host = argv.h;
 const port = argv.p;
+const auth = argv.a;
 
 const startTime = new Date();
 let oldestIdle = -1;
 let pipeline;
 
 const redis = new Redis({
-  host,
-  port
+  host: host,
+  port: port,
+  password: auth
 });
-
 
 // Start scanning
 const stream = redis.scanStream({
