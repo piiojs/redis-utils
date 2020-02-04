@@ -6,14 +6,17 @@ const Redis = require('ioredis');
 const fs = require('fs');
 const { parser } = require('stream-json/Parser');
 const { argv } = require('yargs')
+  .boolean('t')
   .default('h', '127.0.0.1')
   .default('p', 6379)
   .default('a', '')
+  .default('t', false)
   .default('filename', 'dump.json');
 
 const host = argv.h;
 const port = argv.p;
 const auth = argv.a;
+const tls = argv.t;
 const { filename } = argv;
 
 const startTime = new Date();
@@ -22,11 +25,17 @@ let value;
 let keysCount = 0;
 const promises = [];
 
-const redis = new Redis({
+let redisConfig = {
   host: host,
   port: port,
   password: auth
-});
+}
+
+if (tls === true) (
+  redisConfig.tls = {}
+)
+
+const redis = new Redis(redisConfig);
 
 const pipeline = fs.createReadStream(filename).pipe(parser());
 pipeline.on('data', (data) => {

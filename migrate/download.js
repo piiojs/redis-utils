@@ -5,15 +5,18 @@
 const Redis = require('ioredis');
 const fs = require('fs');
 const { argv } = require('yargs')
+  .boolean('t')
   .default('h', '127.0.0.1')
   .default('p', 6379)
   .default('a', '')
+  .default('t', false)
   .default('pattern', '*')
   .default('filename', 'dump.json');
 
 const host = argv.h;
 const port = argv.p;
 const auth = argv.a;
+const tls = argv.t;
 const { pattern } = argv;
 const { filename } = argv;
 
@@ -22,11 +25,17 @@ let keyCount = 0;
 let sep = '';
 const startTime = new Date();
 
-const redis = new Redis({
+let redisConfig = {
   host: host,
   port: port,
   password: auth
-});
+}
+
+if (tls === true) (
+  redisConfig.tls = {}
+)
+
+const redis = new Redis(redisConfig);
 
 // Delete previous file
 if (fs.existsSync(filename)) {
